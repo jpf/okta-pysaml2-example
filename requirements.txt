@@ -1,0 +1,4 @@
+Flask==0.10.1
+Flask-Bootstrap==3.3.2.1
+Flask-Login==0.2.11
+pysaml2==2.4.0

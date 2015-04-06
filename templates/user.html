@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h1>Logged in</h1>
+  <p class="lead">
+    Contents of the most recent SAML assertion:
+    </p>
+  <div class="col-md-8">
+    <table class="table">
+      {% if session.saml_attributes %}
+    {% for attribute in session.saml_attributes.keys() %}
+      <tr>
+	<td>{{ attribute }}</td>
+	<td>{{ session.saml_attributes[attribute][0] }}</td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+    </table>
+    </div>
+  </div>
+{% endblock %}

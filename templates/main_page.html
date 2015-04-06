@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p class="lead">Select the IdP you want to use to authenticate:</p>
+    <ol>
+      {% for idp in idp_dict.keys() %}
+      <li><a href="/saml/login/{{idp}}">{{idp}}</a></li>
+      {% endfor %}
+    </ol>
+{% endblock %}
