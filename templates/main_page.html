@@ -1,9 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p class="lead">Select the IdP you want to use to authenticate:</p>
-    <ol>
-      {% for idp in idp_dict.keys() %}
-      <li><a href="/saml/login/{{idp}}">{{idp}}</a></li>
+{% if current_user.is_authenticated() %}
+<div class="container">
+  <h1>Logged in</h1>
+  <p class="lead">
+    Contents of the most recent SAML assertion:
+    </p>
+  <div class="col-md-8">
+    <table class="table">
+    {% if session.saml_attributes %}
+      {% for attribute in session.saml_attributes.keys() %}
+      <tr>
+	<td>{{ attribute }}</td>
+	<td>{{ session.saml_attributes[attribute][0] }}</td>
+      </tr>
       {% endfor %}
-    </ol>
+    {% endif %}
+    </table>
+  </div>
+</div>
+{% else %}
+<p class="lead">Select the IdP you want to use to authenticate:</p>
+<ol>
+  {% for idp in idp_dict.keys() %}
+  <li><a href="/saml/login/{{idp}}">{{idp}}</a></li>
+  {% endfor %}
+</ol>
+{% endif %}
 {% endblock %}
