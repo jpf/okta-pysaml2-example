@@ -1,0 +1,105 @@
+# This is a file written in Emacs and authored using org-mode (http://orgmode.org/)
+# The "README.md" file is generated from this file by running the
+# "M-x org-md-export-to-markdown" command from inside of Emacs.
+#
+# Don't render a Table of Contents 
+#+OPTIONS: toc:nil
+# Don't render section numbers
+#+OPTIONS: num:nil
+# Turn of subscript parsing: http://super-user.org/wordpress/2012/02/02/how-to-get-rid-of-subscript-annoyance-in-org-mode/comment-page-1/
+#+OPTIONS: ^:{}
+* Introduction
+  This is an example SAML SP service written using [[http://flask.pocoo.org/][Flask]] and [[https://github.com/rohe/pysaml2][pysaml2]].
+* Requirements
+  - [[https://www.python.org/][Python]] 2.7+
+  - [[https://virtualenv.pypa.io/en/latest/][Virtualenv]]
+  - [[https://pip.pypa.io/en/stable/][pip]]
+* Installation
+   #+BEGIN_HTML
+   ```shell
+   $ virtualenv venv
+   $ source venv/bin/activate
+   $ pip install -r requirements.txt 
+   ```
+   #+END_HTML
+* Running
+   #+BEGIN_HTML
+   ```shell
+  $ python app.py 
+   ```
+   #+END_HTML
+* Testing
+  The fastest way to test this example SAML SP is to use the [[http://saml.oktadev.com/][saml.oktadev.com]] service.
+
+  Here is how:
+
+  1. Edit the "app.py" file and uncomment the line in the "test" line in "metadata_url_for" dictionary.
+
+     #+BEGIN_HTML
+     ```shell
+     $ $EDITOR app.py
+     ```
+     #+END_HTML
+
+     Change this line:
+
+     #+BEGIN_HTML
+     ```shell
+     # 'test': 'http://idp.oktadev.com/metadata',                                                                                                
+     ```
+     #+END_HTML
+
+     To this:
+
+     #+BEGIN_HTML
+     ```shell
+     'test': 'http://idp.oktadev.com/metadata',
+     ```
+     #+END_HTML
+  2. Start the example SAML SP
+     #+BEGIN_HTML
+     ```shell
+     $ python app.py
+     ```
+     #+END_HTML
+  3. Start ngrok on the port that the example SAML SP is running on. By default, the example SAML SP runs on TCP 5000.
+
+     #+BEGIN_HTML
+     ```shell
+     $ ngrok http 5000
+     ```
+     #+END_HTML
+
+     You will need to [[https://ngrok.com/download][install ngrok]] if you haven't already.
+
+     Here is what it should look like:
+     #+CAPTION: A screenshot of ngrok 2.0 running
+     [[./docs/_static/ngrok.png]]
+  4. Run [[http://saml.oktadev.com][saml.oktadev.com]] to test this example SAML SP
+     - Load [[http://saml.oktadev.com][saml.oktadev.com]] in your browser and fill out as follows:
+
+       *Issuer:* "urn:example:idp"
+
+       *SAML ACS URL:* "http://REPLACE_ME.ngrok.com/saml/sso/test"
+
+       *SAML Audience URI:* "http://REPLACE_ME.ngrok.com/saml/sso/test"
+
+       Be sure to replace the string "REPLACE_ME" with the sub-domain that ngrok selected for you!
+     - Click the "Submit" button.
+     - Your output should look like the image below:
+       [[./docs/_static/validation-success.png]]
+
+* Testing the security of your SAML SP
+  After successfully completing the steps in the "Testing" section
+  above, select the "Run security validation" option to have
+  saml.oktadev.com run an extended series of security tests against
+  your SAML SP.
+* Contact
+  Updates or corrections to this document are very welcome. Feel free
+  to send [[https://help.github.com/articles/using-pull-requests/][pull requests]] with suggestions.
+
+  # In a (perhaps fruitless) effort to avoid getting more spam, I've
+  # encoded this email address using HTML entities.
+  Additionally, comments or questions can be sent to:
+  &#x64;&#x65;&#x76;&#x65;&#x6C;&#x6F;&#x70;&#x65;&#x72;&#x73;&#x40;&#x6F;&#x6B;&#x74;&#x61;&#x2E;&#x63;&#x6F;&#x6D;
+
