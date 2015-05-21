@@ -83,6 +83,11 @@ def saml_client_for(idp_name=None):
         "idp_initiated",
         idp_name=idp_name,
         _external=True)
+    https_acs_url = url_for(
+        "idp_initiated",
+        idp_name=idp_name,
+        _external=True,
+        _scheme='https')
 
     # NOTE:
     #   Ideally, this should fetch the metadata and pass it to
@@ -108,7 +113,9 @@ def saml_client_for(idp_name=None):
                 'endpoints': {
                     'assertion_consumer_service': [
                         (acs_url, BINDING_HTTP_REDIRECT),
-                        (acs_url, BINDING_HTTP_POST)
+                        (acs_url, BINDING_HTTP_POST),
+                        (https_acs_url, BINDING_HTTP_REDIRECT),
+                        (https_acs_url, BINDING_HTTP_POST)
                     ],
                 },
                 # Don't verify that the incoming requests originate from us via
