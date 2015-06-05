@@ -8,6 +8,25 @@ This is an example SAML SP service written using [Flask](http://flask.pocoo.org/
 -   [Virtualenv](https://virtualenv.pypa.io/en/latest/)
 -   [pip](https://pip.pypa.io/en/stable/)
 
+You will also need a development environment capable of compiling
+Python packages and the "libffi" and "libxmlsec1" development
+libraries, which are needed by PySAML2.
+
+Instructions for installing these development libraries will differ
+depending on your host operating system.
+
+## Mac OS X
+
+```shell
+$ brew install libffi libxmlsec1
+```
+
+## RHEL
+
+```shell
+$ sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
+```
+
 # Installation
 
 ```shell

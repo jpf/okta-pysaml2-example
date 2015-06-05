@@ -14,6 +14,25 @@
   - [[https://www.python.org/][Python]] 2.7+
   - [[https://virtualenv.pypa.io/en/latest/][Virtualenv]]
   - [[https://pip.pypa.io/en/stable/][pip]]
+
+  You will also need a development environment capable of compiling
+  Python packages and the "libffi" and "libxmlsec1" development
+  libraries, which are needed by PySAML2.
+
+  Instructions for installing these development libraries will differ
+  depending on your host operating system.
+** Mac OS X
+   #+BEGIN_HTML
+   ```shell
+   $ brew install libffi libxmlsec1
+   ```
+   #+END_HTML
+** RHEL
+   #+BEGIN_HTML
+   ```shell
+   $ sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
+   ```
+   #+END_HTML
 * Installation
    #+BEGIN_HTML
    ```shell
