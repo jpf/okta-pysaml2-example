@@ -89,24 +89,13 @@ def saml_client_for(idp_name=None):
         _external=True,
         _scheme='https')
 
-    # NOTE:
-    #   Ideally, this should fetch the metadata and pass it to
-    #   PySAML2 via the "inline" metadata type.
-    #   However, this method doesn't seem to work on PySAML2 v2.4.0
-    #
     #   SAML metadata changes very rarely. On a production system,
     #   this data should be cached as approprate for your production system.
     rv = requests.get(metadata_url_for[idp_name])
-    import tempfile
-    tmp = tempfile.NamedTemporaryFile()
-    f = open(tmp.name, 'w')
-    f.write(rv.text)
-    f.close()
 
     settings = {
         'metadata': {
-            # 'inline': metadata,
-            "local": [tmp.name]
+            'inline': [rv.text],
             },
         'service': {
             'sp': {
@@ -134,7 +123,6 @@ def saml_client_for(idp_name=None):
     spConfig.load(settings)
     spConfig.allow_unknown_attributes = True
     saml_client = Saml2Client(config=spConfig)
-    tmp.close()
     return saml_client
 
 
