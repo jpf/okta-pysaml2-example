@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:2.7-jessie
 
 # Install xmlsec1
 RUN echo 'deb http://mirror.isoc.org.il/pub/ubuntu/ trusty main universe' >> /etc/apt/sources.list && \
